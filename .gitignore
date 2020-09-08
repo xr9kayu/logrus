@@ -27,3 +27,5 @@ bin/
 src/
 test/
 pkg/
+.idea
+.DS_Store

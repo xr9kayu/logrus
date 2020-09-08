@@ -19,8 +19,6 @@ var (
 	}
 )
 
-type Options sentry.ClientOptions
-
 type Hook struct {
 	client       *sentry.Client
 	levels       []logrus.Level
@@ -94,12 +92,7 @@ func (hook *Hook) Flush() {
 	hook.client.Flush(hook.flushTimeout)
 }
 
-func NewHook(options Options, levels ...logrus.Level) (*Hook, error) {
-	client, err := sentry.NewClient(sentry.ClientOptions(options))
-	if err != nil {
-		return nil, err
-	}
-
+func NewHook(client *sentry.Client, levels ...logrus.Level) (*Hook, error) {
 	hook := Hook{
 		client:       client,
 		levels:       levels,
